@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Error{
+struct ErrorPlayerForm {
     var name: String
     var attak: String
     var deffense: String
@@ -21,7 +21,7 @@ struct ContentView: View {
     @State private var attak: String = String()
     @State private var deffense: String = String()
     @Environment(\.presentationMode) var presentationMode
-    @State private var errors: Error = Error(name: "", attak: "", deffense: "")
+    @State private var errors: ErrorPlayerForm = ErrorPlayerForm(name: "", attak: "", deffense: "")
     
     var body: some View {
         NavigationStack {
@@ -29,9 +29,23 @@ struct ContentView: View {
                 // Each player name
                 ForEach(store.appState.Players){ player in
                     VStack {
-                        Text(player.name)
-                            .foregroundColor(.black)
-                            .id(player.id)
+                        HStack{
+                            Text(player.name)
+                                .foregroundColor(.black)
+                                .id(player.id)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                store.reduce(action: .deletePlayer(id: player.id))
+                            },
+                                   label: {
+                                Image(systemName: "trash")
+                                .foregroundColor(.red)
+                                
+                            })
+                        }
+                        
                     }
                     .padding(.vertical,5)
                 }
@@ -70,7 +84,7 @@ struct ContentView: View {
         .sheet(isPresented: $isSheet) {
             Sheet(name: $name, errors: $errors, attak: $attak, deffense: $deffense, store: store)
                 .presentationDetents([.fraction(0.5)])
-            .presentationDragIndicator(.visible)
+                .presentationDragIndicator(.visible)
         }
     }
 }

@@ -10,12 +10,12 @@ import SwiftUI
 struct Sheet: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding private var name: String
-    @Binding private var errors: Error
+    @Binding private var errors: ErrorPlayerForm
     @Binding private var attak: String
     @Binding private var deffense: String
     @ObservedObject var store: AppStore
 
-    init (name: Binding<String>, errors: Binding<Error>, attak: Binding<String>, deffense: Binding<String>, store: AppStore) {
+    init (name: Binding<String>, errors: Binding<ErrorPlayerForm>, attak: Binding<String>, deffense: Binding<String>, store: AppStore) {
         _name = name
         _errors = errors
         _attak = attak
@@ -94,7 +94,7 @@ struct Sheet: View {
                     self.name = String()
                     self.attak = String()
                     self.deffense = String()
-                    self.errors = Error(name: "", attak: "", deffense: "")
+                    self.errors = ErrorPlayerForm(name: "", attak: "", deffense: "")
                 }
                 
             }, label: {

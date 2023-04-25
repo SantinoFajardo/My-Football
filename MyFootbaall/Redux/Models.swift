@@ -21,3 +21,8 @@ struct Player: Hashable,Identifiable {
         self.Score = (attak + deffense) / 2
     }
 }
+
+struct User: Codable {
+    var name: String
+    var email: String
+}

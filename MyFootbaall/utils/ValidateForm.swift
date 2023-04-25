@@ -6,7 +6,14 @@
 //
 
 import Foundation
-func validateForm(name:String, attak: String, deffense: String, errors: inout Error) -> Void{
+
+func validateEmail(_ email: String) -> Bool{
+    let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+    return emailPredicate.evaluate(with: email)
+}
+
+func validateForm(name:String, attak: String, deffense: String, errors: inout ErrorPlayerForm) -> Void{
     // ------- name --------
     if name.isEmpty {
         errors.name = "Fill this field"
@@ -34,6 +41,25 @@ func validateForm(name:String, attak: String, deffense: String, errors: inout Er
         errors.deffense = "This value should be between 0 and 5"
     }else{
         errors.deffense = ""
+    }
+}
+
+func validateLogin(email: String, password: String, errors: inout ErrorsLogin){
+    // ------ email --------
+    let isValidEmail: Bool = validateEmail(email)
+    if email.isEmpty {
+        errors.email = "Fill this field"
+    }else if !isValidEmail {
+        errors.email = "Please put a valid email"
+    }else {
+        errors.email = ""
+    }
+    
+    // ------- password --------
+    if password.isEmpty {
+        errors.password = "Please fill this field"
+    }else {
+        errors.password = ""
     }
     
 }

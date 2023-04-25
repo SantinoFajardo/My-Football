@@ -9,4 +9,5 @@ import Foundation
 
 struct AppState {
     var Players: [Player] = []
+    var User: User
 }

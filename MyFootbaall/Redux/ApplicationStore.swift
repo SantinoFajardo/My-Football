@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import FirebaseCore
+
+
 
 class AppStore: ObservableObject {
     @Published private(set) var appState: AppState
@@ -20,3 +23,5 @@ class AppStore: ObservableObject {
         appReducer(action: action, state: &appState)
     }
 }
+
+
