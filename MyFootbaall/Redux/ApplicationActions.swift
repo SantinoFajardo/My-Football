@@ -10,5 +10,5 @@ import Foundation
 enum AppAction {
     case loadPlayer(player: Player)
     case deletePlayer(id: UUID)
-    case registerUser(name: String, email: String, password: String, completion: (Bool, Error?) -> Void)
+    case registerUser(name: String, email: String, password: String)
 }

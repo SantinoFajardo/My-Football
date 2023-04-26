@@ -14,6 +14,7 @@ enum Authentication {
 
 struct AuthenticationView: View {
     @State private var authenticationStatus: Authentication = .login
+    @ObservedObject var store: AppStore
     
     var body: some View {
         NavigationStack {
@@ -44,7 +45,7 @@ struct AuthenticationView: View {
                         LoginView()
                         
                     }else{
-                        Text("Register")
+                       RegisterView(store: store)
                     }
                 }
                 .frame(maxWidth: .infinity ,maxHeight: .infinity, alignment: .top)
@@ -58,6 +59,6 @@ struct AuthenticationView: View {
 
 struct AuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthenticationView()
+        AuthenticationView(store: AppStore(appState: AppState(), reducer: appReducer))
     }
 }

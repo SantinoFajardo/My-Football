@@ -9,5 +9,6 @@ import Foundation
 
 struct AppState {
     var Players: [Player] = []
-    var User: User
+    var User: User?
+    
 }

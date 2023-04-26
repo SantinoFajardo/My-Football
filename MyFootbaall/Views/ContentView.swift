@@ -15,7 +15,7 @@ struct ErrorPlayerForm {
 
 
 struct ContentView: View {
-    @ObservedObject var store: AppStore = AppStore(appState: AppState(), reducer: appReducer)
+    @ObservedObject var store: AppStore
     @State private var isSheet: Bool = false
     @State private var name: String = String()
     @State private var attak: String = String()
@@ -92,7 +92,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(store: AppStore(appState: AppState(), reducer: appReducer))
     }
 }
 

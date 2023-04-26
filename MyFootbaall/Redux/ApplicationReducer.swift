@@ -15,22 +15,25 @@ func appReducer(action: AppAction,state: inout AppState){
         state.Players.append(player)
     case .deletePlayer(id: let id):
         state.Players.removeAll{ $0.id == id }
-    case .registerUser(name: let name, email: let email, password: let password, completion: let completion):
+    case .registerUser(name: let name, email: let email, password: let password):
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let errorMessage = error {
+                print(errorMessage.localizedDescription)
+            }
             guard let _ = authResult?.user, error == nil else {
-                completion(false, error)
                 return
             }
             let db = Firestore.firestore()
             let newUser: [String: Any] = ["name": name, "email":email]
             db.collection("users").addDocument(data: newUser) { error in
                 if let error = error {
-                    completion(false, error)
-                } else {
-                    completion(true, nil)
+                    print(error)
+                    return
                 }
             }
         }
+        state.User?.email = email
+        state.User?.name = name
     }
     
 }

@@ -19,12 +19,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct MyFootbaallApp: App {
+    @ObservedObject var store: AppStore = AppStore(appState: AppState(), reducer: appReducer)
     // register app delegate for Firebase setup
      @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if let _ = store.appState.User {
+                ContentView(store: store)
+            }else{
+                AuthenticationView(store: store)
+            }
         }
     }
 }

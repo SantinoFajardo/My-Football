@@ -1,25 +1,29 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  MyFootbaall
 //
-//  Created by Santino Fajardo on 24/04/2023.
+//  Created by Santino Fajardo on 25/04/2023.
 //
 
 import SwiftUI
 
-struct ErrorsLogin {
+struct ErrorsRegister {
     var email: String
     var password: String
+    var name: String
 }
 
-struct LoginView: View {
+struct RegisterView: View {
     @State private var emailInput: String = String()
     @State private var passwordInput: String = String()
-    @State private var errors: ErrorsLogin = ErrorsLogin(email: "", password: "")
+    @State private var nameInput: String = String()
+    @State private var errors: ErrorsRegister = ErrorsRegister(email: "", password: "",name:"")
+    @ObservedObject var store: AppStore
+
     
     var body: some View {
         VStack{
-            Text("Welcome again to My Football!🎉")
+            Text("Welcome to My Football!🎉")
                 .bold()
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -33,11 +37,26 @@ struct LoginView: View {
                 CustomTextField(input: $emailInput,
                                 error: $errors.email,
                                 validator: {
-                    validateLogin(email: emailInput, password: passwordInput, errors: &errors)})
+                    validateRegister(email: emailInput, password: passwordInput, name: nameInput, errors: &errors)})
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 if !self.errors.email.isEmpty {
                     Text(self.errors.email)
+                        .foregroundColor(.red)
+                        .font(.footnote)
+                        .frame(maxWidth: .infinity, alignment:.leading)
+                }
+                
+                Text("Your name:")
+                    .frame(maxWidth: .infinity,alignment:.leading)
+                CustomTextField(input: $nameInput,
+                                error: $errors.name,
+                                validator: {
+                    validateRegister(email: emailInput, password: passwordInput, name: nameInput, errors: &errors)})
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                if !self.errors.name.isEmpty {
+                    Text(self.errors.name)
                         .foregroundColor(.red)
                         .font(.footnote)
                         .frame(maxWidth: .infinity, alignment:.leading)
@@ -48,7 +67,7 @@ struct LoginView: View {
                 CustomTextField(input: $passwordInput,
                                 error: $errors.password,
                                 validator: {
-                    validateLogin(email: emailInput, password: passwordInput, errors: &errors)})
+                    validateRegister(email: emailInput, password: passwordInput, name: nameInput, errors: &errors)})
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 if !self.errors.password.isEmpty {
@@ -57,14 +76,16 @@ struct LoginView: View {
                         .font(.footnote)
                         .frame(maxWidth: .infinity, alignment:.leading)
                 }
-                    
+                
             }
             .frame(maxWidth: .infinity,alignment: .leading)
             .padding(.horizontal)
             .padding(.top,5)
             
-            Button(action: {}, label: {
-                Text("LOGIN")
+            Button(action: {
+                store.reduce(action: .registerUser(name: nameInput, email: emailInput, password: passwordInput))
+            }, label: {
+                Text("REGISTER")
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 30)
@@ -78,7 +99,7 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         AuthenticationView(store: AppStore(appState: AppState(), reducer: appReducer))
     }

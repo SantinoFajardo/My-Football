@@ -63,3 +63,29 @@ func validateLogin(email: String, password: String, errors: inout ErrorsLogin){
     }
     
 }
+
+func validateRegister(email:String, password: String, name: String, errors: inout ErrorsRegister){
+    // ------ email --------
+    let isValidEmail: Bool = validateEmail(email)
+    if email.isEmpty {
+        errors.email = "Fill this field"
+    }else if !isValidEmail {
+        errors.email = "Please put a valid email"
+    }else {
+        errors.email = ""
+    }
+    
+    // ------- password --------
+    if password.isEmpty {
+        errors.password = "Please fill this field"
+    }else {
+        errors.password = ""
+    }
+    
+    // ------- name --------
+    if name.isEmpty {
+        errors.name = "Please fill this field"
+    }else {
+        errors.name = ""
+    }
+}
