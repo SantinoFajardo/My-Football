@@ -9,10 +9,10 @@ import Foundation
 
 struct Player: Hashable,Identifiable {
     var id = UUID()
-    let name: String
-    let attak: Double
-    let deffense: Double
-    let Score: Double
+    var name: String
+    var attak: Double
+    var deffense: Double
+    var Score: Double
     
     init(name: String, attak: Double, deffense: Double) {
         self.name = name
@@ -23,11 +23,7 @@ struct Player: Hashable,Identifiable {
 }
 
 struct User: Codable {
+    let uid: String
     var name: String
     var email: String
-    
-    init(name: String, email: String) {
-        self.name = name
-        self.email = email
-    }
 }

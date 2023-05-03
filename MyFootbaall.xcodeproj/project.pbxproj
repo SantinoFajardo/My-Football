@@ -19,6 +19,7 @@
 		1B2F824029F4428400AC148D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B2F823F29F4428400AC148D /* Assets.xcassets */; };
 		1B2F824329F4428400AC148D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B2F824229F4428400AC148D /* Preview Assets.xcassets */; };
 		1B4F544029F8B2B900669396 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F543F29F8B2B900669396 /* RegisterView.swift */; };
+		1BAA793D2A014CEA006C05EF /* EditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA793C2A014CEA006C05EF /* EditSheet.swift */; };
 		1BC02E3B29F586AA00C374AC /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC02E3A29F586AA00C374AC /* CustomTextField.swift */; };
 		1BC02E4229F5CE0400C374AC /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC02E4129F5CE0400C374AC /* Match.swift */; };
 		1BC1F14329F7675D00473405 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1BC1F14229F7675D00473405 /* FirebaseAnalytics */; };
@@ -30,6 +31,9 @@
 		1BCF123D29F7154200A6419D /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF123C29F7154200A6419D /* AuthenticationView.swift */; };
 		1BCF123F29F71B8600A6419D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF123E29F71B8600A6419D /* LoginView.swift */; };
 		1BDAF6A329F6B5EF00E89281 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDAF6A229F6B5EF00E89281 /* Sheet.swift */; };
+		1BE36E8529FD76F10091329B /* NavTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE36E8429FD76F10091329B /* NavTabView.swift */; };
+		1BE36E8729FD78A90091329B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE36E8629FD78A90091329B /* ProfileView.swift */; };
+		1BE36E8A29FD97260091329B /* controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE36E8929FD97260091329B /* controllers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,12 +50,16 @@
 		1B2F823F29F4428400AC148D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B2F824229F4428400AC148D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B4F543F29F8B2B900669396 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		1BAA793C2A014CEA006C05EF /* EditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSheet.swift; sourceTree = "<group>"; };
 		1BC02E3A29F586AA00C374AC /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		1BC02E4129F5CE0400C374AC /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		1BC1F14C29F7677100473405 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BCF123C29F7154200A6419D /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1BCF123E29F71B8600A6419D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1BDAF6A229F6B5EF00E89281 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
+		1BE36E8429FD76F10091329B /* NavTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavTabView.swift; sourceTree = "<group>"; };
+		1BE36E8629FD78A90091329B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1BE36E8929FD97260091329B /* controllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controllers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 		1B00522829F6155D005EEDDC /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				1BE36E8829FD971B0091329B /* Controllers */,
 				1B00521B29F61456005EEDDC /* Algorithm.swift */,
 				1B00522B29F61D6E005EEDDC /* ValidateForm.swift */,
 			);
@@ -145,6 +154,7 @@
 			children = (
 				1BC02E3A29F586AA00C374AC /* CustomTextField.swift */,
 				1BDAF6A229F6B5EF00E89281 /* Sheet.swift */,
+				1BAA793C2A014CEA006C05EF /* EditSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -154,9 +164,19 @@
 			children = (
 				1BCF123B29F7152B00A6419D /* Authentication */,
 				1BC02E4129F5CE0400C374AC /* Match.swift */,
+				1BE36E8429FD76F10091329B /* NavTabView.swift */,
 				1B2F823D29F4428300AC148D /* ContentView.swift */,
+				1BE36E8629FD78A90091329B /* ProfileView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1BE36E8829FD971B0091329B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1BE36E8929FD97260091329B /* controllers.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,12 +262,16 @@
 			files = (
 				1B00522529F61502005EEDDC /* ApplicationReducer.swift in Sources */,
 				1B00522329F614EA005EEDDC /* ApplicationActions.swift in Sources */,
+				1BE36E8529FD76F10091329B /* NavTabView.swift in Sources */,
 				1B2F823E29F4428300AC148D /* ContentView.swift in Sources */,
+				1BAA793D2A014CEA006C05EF /* EditSheet.swift in Sources */,
 				1BDAF6A329F6B5EF00E89281 /* Sheet.swift in Sources */,
+				1BE36E8A29FD97260091329B /* controllers.swift in Sources */,
 				1B00522129F614D0005EEDDC /* ApplicationState.swift in Sources */,
 				1B00522729F61538005EEDDC /* ApplicationStore.swift in Sources */,
 				1B4F544029F8B2B900669396 /* RegisterView.swift in Sources */,
 				1B2F823C29F4428300AC148D /* MyFootbaallApp.swift in Sources */,
+				1BE36E8729FD78A90091329B /* ProfileView.swift in Sources */,
 				1B00522C29F61D6E005EEDDC /* ValidateForm.swift in Sources */,
 				1BCF123F29F71B8600A6419D /* LoginView.swift in Sources */,
 				1BC02E4229F5CE0400C374AC /* Match.swift in Sources */,

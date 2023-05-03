@@ -39,7 +39,7 @@ struct Sheet: View {
                                 validator: {validateForm(name: self.name,
                                                          attak: self.attak,
                                                          deffense: self.deffense,
-                                                         errors: &self.errors)})
+                                                         errors: &self.errors)}, placeHolder: "Player name")
                 
                 if !self.errors.name.isEmpty {
                     VStack{
@@ -56,7 +56,7 @@ struct Sheet: View {
                                 validator: {validateForm(name: self.name,
                                                          attak: self.attak,
                                                          deffense: self.deffense,
-                                                         errors: &self.errors)})
+                                                         errors: &self.errors)}, placeHolder: "Player attak")
                 
                 if !self.errors.attak.isEmpty {
                     VStack{
@@ -74,7 +74,7 @@ struct Sheet: View {
                     validateForm(name: self.name,
                                  attak: self.attak,
                                  deffense: self.deffense,
-                                 errors: &self.errors)})
+                                 errors: &self.errors)}, placeHolder: "Player deffense")
                 
                 if !self.errors.deffense.isEmpty {
                     VStack{

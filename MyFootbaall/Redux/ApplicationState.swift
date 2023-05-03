@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct AppState {
+class AppState: ObservableObject {
     var Players: [Player] = []
-    var User: User?
-    
+    @Published var User: User?
+    var loading: Bool = false
+    var isLogged: Bool = false
 }

@@ -18,40 +18,45 @@ struct AuthenticationView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                HStack(spacing:60){
-                    Button(action: {
-                        self.authenticationStatus = .login
-                    }, label: {
-                        Text("LOG IN")
-                            .font(.subheadline)
-                            .foregroundColor(self.authenticationStatus != .login ? .green : .gray)
-                    })
-                    .disabled(self.authenticationStatus == .login)
-                    
-                    Button(action: {
-                        self.authenticationStatus = .register
-                    }, label: {
-                        Text("SIGN IN")
-                            .font(.subheadline)
-                            .foregroundColor(self.authenticationStatus != .register ? .green : .gray)
-                    })
-                    .disabled(self.authenticationStatus == .register)
-                    
-                }
-                
-                ScrollView{
-                    if self.authenticationStatus == .login {
-                        LoginView()
+            ZStack {
+                Color(.white).ignoresSafeArea()
+                VStack {
+                    HStack(spacing:60){
+                        Button(action: {
+                            self.authenticationStatus = .login
+                        }, label: {
+                            Text("LOG IN")
+                                .font(.subheadline)
+                                .foregroundColor(self.authenticationStatus != .login ? .green : .gray)
+                        })
+                        .disabled(self.authenticationStatus == .login)
                         
-                    }else{
-                       RegisterView(store: store)
+                        Button(action: {
+                            self.authenticationStatus = .register
+                        }, label: {
+                            Text("SIGN IN")
+                                .font(.subheadline)
+                                .foregroundColor(self.authenticationStatus != .register ? .green : .gray)
+                        })
+                        .disabled(self.authenticationStatus == .register)
+                        
                     }
+                    
+                    ScrollView{
+                        if self.authenticationStatus == .login {
+                            LoginView(store:store)
+                            
+                        }else{
+                           RegisterView(store: store)
+                        }
+                    }
+                    .frame(maxWidth: .infinity ,maxHeight: .infinity, alignment: .top)
+                    .padding(.top)
+                    .navigationTitle("MY FOOTBALL")
+                    .foregroundColor(.black)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .preferredColorScheme(.light)
                 }
-                .frame(maxWidth: .infinity ,maxHeight: .infinity, alignment: .top)
-                .padding(.top)
-                .navigationTitle("MY FOOTBALL")
-                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }

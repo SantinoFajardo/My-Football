@@ -6,14 +6,28 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct Match: View {
     @State private var players: [Player]
     @State private var match: ([String], [String])
-    init(players: [Player]) {
-        self.players = players
-        self.match = createBalancedTeams(players: players)
+    @ObservedObject var store: AppStore
+    @State private var sheet: Bool = false
+    init(players: [Player],store: AppStore) {
+        self._players = State(initialValue: players)
+        self._match = State(initialValue: createBalancedTeams(players: players))
+        self.store = store
     }
+    @State private var place: String = String()
+    @State private var selectedDate: Date = Date()
+    @State private var alreadySaved: Bool = false
+    @State private var showingAlert: Bool = false
+    
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter
+    }()
     
     var body: some View {
         NavigationStack {
@@ -31,6 +45,18 @@ struct Match: View {
                         }
                     }
                 }
+                Button(action: {
+                    self.sheet = true
+                }, label: {
+                    Text("Save match")
+                    
+                })
+            }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("We create the match successfully"),
+                      message:Text("You can see this match in your matchs lists"),
+                      dismissButton: .default(Text("Continue"))
+                )
             }
             .navigationTitle("Match")
             .toolbar{
@@ -43,6 +69,31 @@ struct Match: View {
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())
+            .sheet(isPresented: $sheet) {
+                Form{
+                    DatePicker("Date", selection: $selectedDate, in: Date()...)
+                    TextField("Place of the match",text: $place)
+                        .autocorrectionDisabled()
+                }
+                Button(action: {
+                    store.reduce(action: .saveMatch(team1: match.0,
+                                                    team2: match.1,
+                                                    creator: Auth.auth().currentUser!.uid,
+                                                    place: self.place,
+                                                    date: dateFormatter.string(from: selectedDate)
+                                                   ))
+                    self.alreadySaved = true
+                    self.showingAlert = true
+                    self.sheet = false
+                }, label: {Text("Save")})
+                .disabled(self.alreadySaved)
+                .presentationDetents([.fraction(0.25)])
+                .presentationDragIndicator(.visible)
+            }
+            .onTapGesture {
+                // Ocultar el teclado
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
         }
     }
 }
@@ -75,7 +126,7 @@ struct Match_Previews: PreviewProvider {
                                      Player(name: "Tigre",
                                             attak: 4, deffense: 5)
         ]
-        return Match(players: mockedMatch)
+        return Match(players: mockedMatch, store: AppStore(appState: AppState(), reducer: appReducer))
     }
 }
 

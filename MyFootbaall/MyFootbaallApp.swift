@@ -7,27 +7,26 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAuth
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
 }
 
 @main
 struct MyFootbaallApp: App {
-    @ObservedObject var store: AppStore = AppStore(appState: AppState(), reducer: appReducer)
-    // register app delegate for Firebase setup
-     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    @StateObject var store: AppStore = AppStore(appState: AppState(), reducer: appReducer)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
-            if let _ = store.appState.User {
-                ContentView(store: store)
-            }else{
+            if Auth.auth().currentUser != nil {
+                NavTabView(store: store)
+            } else {
                 AuthenticationView(store: store)
             }
         }
